@@ -4,7 +4,7 @@ import React from "react";
 
 
 const heading = new Heading();
-
+heading.render('button');
 
 const button = new HelloWorldButton.render;
 
