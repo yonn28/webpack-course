@@ -1,3 +1,19 @@
+import NavigationBar from './components/navigation-bar/navigation-bar';
+
+const navigationItems = [
+    {
+        url:'hello-world',
+        title:'hello world'
+    },
+    {
+        url:'kiwi-page',
+        title:'kiwi page'
+    }
+];
+
+const navigationBar = new NavigationBar();
+navigationBar.render(navigationItems);
+
 const url = window.location.pathname;
 
 if ( url =='/hello-world' ){
