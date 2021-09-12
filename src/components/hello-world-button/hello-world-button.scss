@@ -1,8 +1,9 @@
 $font-size: 20px;
 $button-background-color: green;
 $button-font-color: white;
+$text-font-color: red;
 
-.hellow-world-button{
+.hello-world-button {
     font-size: $font-size;
     padding: 7px 15px;
     background: $button-background-color;
@@ -10,8 +11,7 @@ $button-font-color: white;
     outline: none;
 }
 
-.hellow-world-text{
-    color: green;
+.hello-world-text {
+    color: $text-font-color;
     font-weight: bold;
-
 }

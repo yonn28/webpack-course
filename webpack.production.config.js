@@ -1,25 +1,24 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const HtmlWebpackPlugin  = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        'hello-world':'./src/hello-world.js',
-        'dog': './src/dog.js'
+        'hello-world': './src/hello-world.js',
+        'kiwi': './src/kiwi.js'
     },
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, './dist'),
         publicPath: '/static/'
     },
-    mode:'production',
+    mode: 'production',
     optimization: {
-        splitChunks:{
-            chunks:'all',
+        splitChunks: {
+            chunks: 'all',
             minSize: 10000,
-            automaticNameDelimiter: '_',
+            automaticNameDelimiter: '_'
         }
     },
     module: {
@@ -31,7 +30,7 @@ module.exports = {
                 ]
             },
             {
-                test:/\.css$/,
+                test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader, 'css-loader'
                 ]
@@ -48,8 +47,8 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets:[ '@babel/env' ],
-                        plugins: [ 'transform-class-properties' ]
+                        presets: [ '@babel/env' ],
+                        plugins: [ '@babel/plugin-proposal-class-properties' ]
                     }
                 }
             },
@@ -62,30 +61,23 @@ module.exports = {
         ]
     },
     plugins: [
-        new TerserPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
         }),
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: [
-                '**/*',
-                path.join(process.cwd(), 'build/**/*')
-            ]
-        }),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             filename: 'hello-world.html',
-            chunks: ['hello-world','vendors~hello-world~dog'],
+            chunks: ['hello-world'],
             title: 'Hello world',
-            template: 'src/index.hbs',
-            description: 'some hello world description'
+            description: 'Hello world',
+            template: 'src/page-template.hbs'
         }),
         new HtmlWebpackPlugin({
-            filename: 'dog.html',
-            chunks:['dog','vendors~hello-world~dog'],
-            title: 'dog',
-            template: 'src/dog.hbs',
-            description: 'some dog description'
+            filename: 'kiwi.html',
+            chunks: ['kiwi'],
+            title: 'Kiwi',
+            description: 'Kiwi',
+            template: 'src/page-template.hbs'
         })
-
     ]
-}
+};
